@@ -372,8 +372,11 @@ platform :ios do
         export_options: {
           provisioningProfiles: {
             app_identifier => provisioning_profile_name
-          }
-        }
+          },
+          method: "ad-hoc",
+          signingStyle: "manual"  # Enforce manual signing
+        },
+#         xcargs: "CODE_SIGN_STYLE=AUTOMATIC CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
       )
   end
 
