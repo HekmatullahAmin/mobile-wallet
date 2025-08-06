@@ -56,7 +56,6 @@ jobs:
           git_branch: 'mifospay'
           match_type: 'adhoc'
           provisioning_profile_name: 'match AdHoc org.mifospay'
-        secrets:
           appstore_key_id: ${{ secrets.APPSTORE_KEY_ID }}
           appstore_issuer_id: ${{ secrets.APPSTORE_ISSUER_ID }}
           appstore_auth_key: ${{ secrets.APPSTORE_AUTH_KEY }}
