@@ -365,18 +365,16 @@ platform :ios do
       provisioning_profile_name = options[:provisioning_profile_name] || ios_config[:provisioning_profile_name]
 
       build_ios_app(
-        scheme: ios_config[:scheme],
-        workspace: ios_config[:workspace_path],
-        output_name: ios_config[:output_name],
-        output_directory: ios_config[:output_directory],
-        export_options: {
-          provisioningProfiles: {
-            app_identifier => provisioning_profile_name
+          scheme: ios_config[:scheme],
+          workspace: ios_config[:workspace_path],
+          output_name: ios_config[:output_name],
+          output_directory: ios_config[:output_directory],
+          export_options: {
+              provisioningProfiles: {
+                  app_identifier => provisioning_profile_name
+              }
           },
-          method: "ad-hoc",
-          signingStyle: "manual"  # Enforce manual signing
-        },
-#         xcargs: "CODE_SIGN_STYLE=AUTOMATIC CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
+          xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
       )
   end
 
