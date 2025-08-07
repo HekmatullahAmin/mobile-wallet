@@ -350,7 +350,7 @@ platform :ios do
       match(
         type: options[:match_type] || ios_config[:match_type],
         app_identifier: options[:app_identifier] || ios_config[:app_identifier],
-        readonly: false,
+        readonly: true,
         git_url: options[:git_url] || ios_config[:git_url],
         git_branch: options[:git_branch] || ios_config[:git_branch],
         git_private_key: options[:git_private_key] || ios_config[:match_git_private_key],
