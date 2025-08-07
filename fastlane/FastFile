@@ -366,6 +366,7 @@ platform :ios do
 
       build_ios_app(
           scheme: ios_config[:scheme],
+          verbose:true,
           workspace: ios_config[:workspace_path],
           export_method: "ad-hoc",
           output_name: ios_config[:output_name],
@@ -375,7 +376,7 @@ platform :ios do
                   app_identifier => provisioning_profile_name
               }
           },
-          xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
+#           xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
       )
   end
 
