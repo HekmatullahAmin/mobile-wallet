@@ -27,7 +27,7 @@ jobs:
   Build_ios:
     name: Build ios
     if: ${{ inputs.build_ios }}
-    runs-on: macos-latest
+    runs-on: macos-latest-large
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
