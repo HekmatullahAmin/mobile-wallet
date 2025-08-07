@@ -61,6 +61,7 @@ jobs:
           appstore_auth_key: ${{ secrets.APPSTORE_AUTH_KEY }}
           match_password: ${{ secrets.MATCH_PASSWORD }}
           match_ssh_private_key: ${{ secrets.MATCH_SSH_PRIVATE_KEY }}
+
   Publish to Firebase:
     name: Publish fiebase
     if: ${{ inputs.distribute_ios_firebase }}
