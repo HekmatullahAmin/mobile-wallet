@@ -43,13 +43,17 @@ jobs:
       - name: Generate dummy framework for KMP
         run: ./gradlew cmp-shared:generateDummyFramework
 
+      - name: Install CocoaPods dependencies (once to configure Gradle)
+        working-directory: 'cmp-ios'
+        run: pod install
+
       - name: Prebuild KMP iOS framework
         run: ./gradlew :cmp-shared:syncFramework \
           -Pkotlin.native.cocoapods.platform=iphoneos \
           -Pkotlin.native.cocoapods.archs=arm64 \
           -Pkotlin.native.cocoapods.configuration=Release
 
-      - name: Install CocoaPods dependencies
+      - name: Install CocoaPods dependencies (final with skip)
         working-directory: 'cmp-ios'
         env:
           OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED: YES
