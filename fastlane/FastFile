@@ -364,6 +364,17 @@ platform :ios do
       app_identifier = options[:app_identifier] || ios_config[:app_identifier]
       provisioning_profile_name = options[:provisioning_profile_name] || ios_config[:provisioning_profile_name]
 
+      # Manual signing for your main app target
+      update_code_signing_settings(
+        use_automatic_signing: false,
+        path: "cmp-ios/iosApp.xcodeproj",
+        targets: ["iosApp"],
+        team_id: "L432S2FZP5",
+        code_sign_identity: "Apple Distribution",
+        profile_name: "match AdHoc org.mifospay",
+        bundle_identifier: "org.mifospay"
+      )
+
       build_ios_app(
           scheme: ios_config[:scheme],
           verbose:true,
@@ -376,7 +387,7 @@ platform :ios do
                   app_identifier => provisioning_profile_name
               }
           },
-          xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
+#           xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
       )
   end
 
