@@ -381,11 +381,11 @@ platform :ios do
           export_method: "ad-hoc",
           output_name: ios_config[:output_name],
           output_directory: ios_config[:output_directory],
-          export_options: {
-              provisioningProfiles: {
-                  app_identifier => provisioning_profile_name
-              }
-          },
+#           export_options: {
+#               provisioningProfiles: {
+#                   app_identifier => provisioning_profile_name
+#               }
+#           },
           skip_codesigning: false,
           skip_archive: true
 #           xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
