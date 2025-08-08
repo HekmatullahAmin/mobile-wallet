@@ -48,10 +48,18 @@ jobs:
         run: pod install
 
       - name: Prebuild KMP iOS framework
-        run: ./gradlew :cmp-shared:syncFramework \
-          -Pkotlin.native.cocoapods.platform=iphoneos \
-          -Pkotlin.native.cocoapods.archs=arm64 \
-          -Pkotlin.native.cocoapods.configuration=Release
+        run: |
+          set -ev
+          KOTLIN_PROJECT_PATH=":cmp-shared"
+          PLATFORM_NAME="iphoneos"
+          ARCHS="arm64"
+          CONFIGURATION="Release"
+          REPO_ROOT="$PODS_TARGET_SRCROOT"
+          
+          "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+              -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
+              -Pkotlin.native.cocoapods.archs="$ARCHS" \
+              -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"
 
       - name: Install CocoaPods dependencies (final with skip)
         working-directory: 'cmp-ios'
