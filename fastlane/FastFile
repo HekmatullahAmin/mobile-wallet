@@ -387,7 +387,7 @@ platform :ios do
 #               }
 #           },
           skip_codesigning: false,
-          skip_archive: false
+#           skip_archive: false
 #           xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
       )
   end
