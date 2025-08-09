@@ -34,15 +34,17 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      # Install Ruby & Fastlane with Homebrew
-      - name: Install Ruby & Fastlane via Homebrew
+      - name: Configure Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.5' # Not needed with a .ruby-version, .tool-versions or mise.toml
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Install Fastlane
+        shell: bash
         run: |
-          brew update
-          brew install ruby fastlane
-          echo "$(brew --prefix ruby)/bin" >> $GITHUB_PATH
-          echo "$(brew --prefix fastlane)/bin" >> $GITHUB_PATH
-          ruby --version
-          fastlane --version
+          gem install bundler
+          bundle install --jobs 4 --retry 3
 
       - name: Set up App Store Auth Key
         env:
@@ -62,8 +64,8 @@ jobs:
           echo -e "Host github.com\n  IdentityFile ~/.ssh/match_ci_key\n  StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Install CocoaPods
-        run: brew install cocoapods
-#        run: sudo gem install cocoapods
+#        run: brew install cocoapods
+        run: sudo gem install cocoapods
 
       - name: Generate Dummy Framework for KMP
         run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
