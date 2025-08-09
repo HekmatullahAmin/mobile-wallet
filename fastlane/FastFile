@@ -386,7 +386,8 @@ platform :ios do
 #                   app_identifier => provisioning_profile_name
 #               }
 #           },
-          skip_codesigning: false,
+          skip_codesigning: true,
+          configuration: "Release"
 #           skip_archive: false
 #           xcargs: "CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=\"Apple Distribution\" DEVELOPMENT_TEAM=L432S2FZP5 PROVISIONING_PROFILE_SPECIFIER=\"#{provisioning_profile_name}\""
       )
