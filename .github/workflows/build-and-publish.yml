@@ -43,7 +43,7 @@ jobs:
       - name: Install Fastlane
         shell: bash
         run: |
-          gem install bundler
+          gem install bundler:2.5.23
           bundle install --jobs 4 --retry 3
 
       - name: Set up App Store Auth Key
@@ -64,7 +64,6 @@ jobs:
           echo -e "Host github.com\n  IdentityFile ~/.ssh/match_ci_key\n  StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Install CocoaPods
-#        run: brew install cocoapods
         run: sudo gem install cocoapods
 
       - name: Generate Dummy Framework for KMP
@@ -85,7 +84,7 @@ jobs:
           APP_IDENTIFIER: "org.mifospay"
           PROVISIONING_PROFILE_NAME: "match AdHoc org.mifospay"
         run: |
-          fastlane ios build_signed_ios \
+          bundle exec fastlane ios build_signed_ios \
           appstore_key_id:"$APPSTORE_KEY_ID" \
           appstore_issuer_id:"$APPSTORE_ISSUER_ID" \
           key_filepath:secrets/Auth_key.p8 \
