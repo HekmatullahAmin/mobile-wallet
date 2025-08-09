@@ -1,5 +1,8 @@
 PODS:
-  - cmp_shared (1.0)
+  - cmp_shared (1.0):
+    - FirebaseAnalytics (= 12.1.0)
+    - FirebaseCore (= 12.1.0)
+    - FirebaseCrashlytics (= 12.1.0)
   - FirebaseAnalytics (12.1.0):
     - FirebaseAnalytics/Default (= 12.1.0)
     - FirebaseCore (~> 12.1.0)
@@ -117,9 +120,6 @@ PODS:
 
 DEPENDENCIES:
   - cmp_shared (from `../cmp-shared`)
-  - FirebaseAnalytics
-  - FirebaseCore
-  - FirebaseCrashlytics
 
 SPEC REPOS:
   trunk:
@@ -144,7 +144,7 @@ EXTERNAL SOURCES:
     :path: "../cmp-shared"
 
 SPEC CHECKSUMS:
-  cmp_shared: 572f72160ae05ea5b3f48ce339a45689782322e3
+  cmp_shared: 147728562035b97c567114937aafdfdc26885440
   FirebaseAnalytics: e89a37004bce8789cb53f4cb3e80160d925e6624
   FirebaseCore: 5a452ffa66f37c8e281076996837626c5d08c090
   FirebaseCoreExtension: dd89d73548ee9be5d8dc60e5c76bc421b965853b
@@ -161,6 +161,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
 
-PODFILE CHECKSUM: 2265450967be6fee8f6e660375965cc3d06af246
+PODFILE CHECKSUM: 839a455f00a1489e5b5f493ecb671359f9126cdb
 
 COCOAPODS: 1.16.2

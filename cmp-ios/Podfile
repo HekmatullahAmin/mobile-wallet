@@ -8,9 +8,9 @@ target 'iosApp' do
   pod 'cmp_shared', path: '../cmp-shared'
 
   # Native Firebase iOS Pods required by firebase-kotlin-sdk
-  pod 'FirebaseCore'
-  pod 'FirebaseAnalytics'
-  pod 'FirebaseCrashlytics'
+#   pod 'FirebaseCore'
+#   pod 'FirebaseAnalytics'
+#   pod 'FirebaseCrashlytics'
 end
 #
 # post_install do |installer|
