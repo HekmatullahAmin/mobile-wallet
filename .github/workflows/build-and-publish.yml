@@ -62,7 +62,8 @@ jobs:
           echo -e "Host github.com\n  IdentityFile ~/.ssh/match_ci_key\n  StrictHostKeyChecking no" >> ~/.ssh/config
 
       - name: Install CocoaPods
-        run: sudo gem install cocoapods
+        run: brew install cocoapods
+#        run: sudo gem install cocoapods
 
       - name: Generate Dummy Framework for KMP
         run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
