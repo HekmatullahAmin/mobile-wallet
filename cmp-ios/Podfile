@@ -1,3 +1,7 @@
+# Use the CDN as the source for CocoaPods specs. Without this line the
+# Kotlin CocoaPods plugin may refuse to run `pod install`.
+source 'https://cdn.cocoapods.org'
+
 platform :ios, '16.0'
 use_frameworks!
 
@@ -7,18 +11,17 @@ target 'iosApp' do
   # Your shared Kotlin/Native Pod
   pod 'cmp_shared', path: '../cmp-shared'
 
-  # Native Firebase iOS Pods required by firebase-kotlin-sdk
-#   pod 'FirebaseCore'
-#   pod 'FirebaseAnalytics'
-#   pod 'FirebaseCrashlytics'
+  # Optional: other native pods can go here.
 end
+
 post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
-        end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
     end
+  end
 end
+
 #
 # post_install do |installer|
 #   installer.pods_project.targets.each do |target|
