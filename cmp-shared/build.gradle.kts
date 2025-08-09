@@ -88,6 +88,7 @@ kotlin {
 
         framework {
             baseName = "ComposeApp"
+            compilerOptions.optIn.add("-Xbinary=bundleId=org.mifospay")
             isStatic = true
         }
 
