@@ -77,6 +77,15 @@ jobs:
           pod repo update
           pod --version
 
+      - name: Sanity check Ruby/CocoaPods
+        run: |
+          which ruby && ruby -v
+          which pod && pod --version
+    
+
+      - name: Precreate compose resources dir (for KMP CocoaPods)
+        run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
+
       - name: Generate Dummy Framework for KMP
         run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
 

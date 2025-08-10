@@ -5,7 +5,7 @@ target 'iosApp' do
   project 'iosApp.xcodeproj'
 
   # Your shared Kotlin/Native Pod
-  pod 'cmp_shared', path: '../cmp-shared'
+  pod 'cmp_shared', :path => '../cmp-shared'
 
   # Optional: other native pods can go here.
 end

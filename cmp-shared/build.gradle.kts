@@ -80,6 +80,9 @@ kotlin {
     }
 
     cocoapods {
+
+        // Explicitly set the Pod name to match your Podfile entry
+        name = "cmp_shared"
         summary = "KMP Shared Module"
         homepage = "https://github.com/openMF/mobile-wallet"
         version = "1.0"
@@ -88,23 +91,8 @@ kotlin {
 
         framework {
             baseName = "ComposeApp"
-            compilerOptions.optIn.add("-Xbinary=bundleId=org.mifospay")
             isStatic = true
         }
-
-        // iOS SDKs required by GitLive
-//        pod("FirebaseCore") {
-//            version = "12.1.0"
-//            extraOpts += listOf("-compiler-option", "-fmodules")
-//        }
-//        pod("FirebaseAnalytics") {
-//            version = "12.1.0"
-//            extraOpts += listOf("-compiler-option", "-fmodules")
-//        }
-//        pod("FirebaseCrashlytics") {
-//            version = "12.1.0"
-//            extraOpts += listOf("-compiler-option", "-fmodules")
-//        }
     }
 }
 

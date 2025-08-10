@@ -5,72 +5,47 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.000168">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000205">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to ios increment_version lane" time="0.000156">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios setup_ci_if_needed lane" time="0.000106">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: firebase_app_distribution_get_latest_release" time="1.487805">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios load_api_key lane" time="5.6e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: Switch to ios build_signed_ios lane" time="0.000382">
+      <testcase classname="fastlane.lanes" name="3: app_store_connect_api_key" time="0.003422">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: Switch to ios setup_ci_if_needed lane" time="0.000269">
+      <testcase classname="fastlane.lanes" name="4: Switch to ios fetch_certificates_with_match lane" time="8.1e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: Switch to ios load_api_key lane" time="0.000286">
+      <testcase classname="fastlane.lanes" name="5: match" time="6.201621">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: app_store_connect_api_key" time="0.010104">
+      <testcase classname="fastlane.lanes" name="6: Switch to ios build_ios_project lane" time="0.000106">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: Switch to ios fetch_certificates_with_match lane" time="0.000295">
+      <testcase classname="fastlane.lanes" name="7: update_code_signing_settings" time="0.054848">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: match" time="6.779149">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="09: Switch to ios build_ios_project lane" time="0.000162">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="10: build_ios_app" time="1599.756975">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="11: Switch to ios generateReleaseNote lane" time="0.000179">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="12: changelog_from_git_commits" time="0.018834">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="13: firebase_app_distribution" time="222.652332">
+      <testcase classname="fastlane.lanes" name="8: build_ios_app" time="160.364613">
         
       </testcase>
     
