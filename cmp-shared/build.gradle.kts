@@ -93,18 +93,18 @@ kotlin {
         }
 
         // iOS SDKs required by GitLive
-        pod("FirebaseCore") {
-            version = "12.1.0"
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
-        pod("FirebaseAnalytics") {
-            version = "12.1.0"
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
-        pod("FirebaseCrashlytics") {
-            version = "12.1.0"
-            extraOpts += listOf("-compiler-option", "-fmodules")
-        }
+//        pod("FirebaseCore") {
+//            version = "12.1.0"
+//            extraOpts += listOf("-compiler-option", "-fmodules")
+//        }
+//        pod("FirebaseAnalytics") {
+//            version = "12.1.0"
+//            extraOpts += listOf("-compiler-option", "-fmodules")
+//        }
+//        pod("FirebaseCrashlytics") {
+//            version = "12.1.0"
+//            extraOpts += listOf("-compiler-option", "-fmodules")
+//        }
     }
 }
 

@@ -13,17 +13,6 @@
   "platforms": {
     "ios": "16.0"
   },
-  "dependencies": {
-    "FirebaseAnalytics": [
-      "12.1.0"
-    ],
-    "FirebaseCore": [
-      "12.1.0"
-    ],
-    "FirebaseCrashlytics": [
-      "12.1.0"
-    ]
-  },
   "xcconfig": {
     "ENABLE_USER_SCRIPT_SANDBOXING": "NO"
   },
