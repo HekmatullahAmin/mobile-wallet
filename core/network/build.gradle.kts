@@ -48,7 +48,13 @@ dependencies {
     add("kspJs", libs.ktorfit.ksp)
     add("kspWasmJs", libs.ktorfit.ksp)
     add("kspDesktop", libs.ktorfit.ksp)
-    add("kspIosX64", libs.ktorfit.ksp)
-    add("kspIosArm64", libs.ktorfit.ksp)
-    add("kspIosSimulatorArm64", libs.ktorfit.ksp)
+    // Add iOS KSP only if the configuration exists (i.e., target is registered)
+    listOf("IosArm64", "IosX64", "IosSimulatorArm64").forEach { cfg ->
+        configurations.findByName("ksp$cfg")?.let {
+            add("ksp$cfg", libs.ktorfit.ksp)
+        }
+    }
+//    add("kspIosX64", libs.ktorfit.ksp)
+//    add("kspIosArm64", libs.ktorfit.ksp)
+//    add("kspIosSimulatorArm64", libs.ktorfit.ksp)
 }
