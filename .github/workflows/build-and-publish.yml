@@ -86,10 +86,10 @@ jobs:
           podfile-path: cmp-ios/Podfile.lock
 
       # Install CocoaPods into the ruby/setup-ruby environment (no sudo)
-      - name: Install CocoaPods
-        run: |
-          cd cmp-ios
-          pod install --verbose
+#      - name: Install CocoaPods
+#        run: |
+#          cd cmp-ios
+#          pod install --verbose
 
       - name: Sanity check Ruby/CocoaPods
         run: |
