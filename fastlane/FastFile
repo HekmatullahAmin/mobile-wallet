@@ -388,7 +388,9 @@ platform :ios do
           export_method: "ad-hoc",
           output_name: ios_config[:output_name],
           output_directory: ios_config[:output_directory],
-          configuration: "Release"
+          configuration: "Release",
+          xcodebuild_formatter: "", # ← disable xcbeautify/xcpretty
+          xcargs: "KOTLIN_BUILD_EXTRA_ARGS='--info --stacktrace'"
 #           export_options: {
 #               provisioningProfiles: {
 #                   app_identifier => provisioning_profile_name
