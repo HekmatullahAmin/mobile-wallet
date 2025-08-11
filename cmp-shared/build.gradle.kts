@@ -18,11 +18,18 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
 }
 
-val deviceOnly = providers
-    .gradleProperty("kmp.ios.deviceOnly")
+// Pick up a flag from env or a Gradle property
+val deviceOnly: Boolean = providers.environmentVariable("KMP_IOS_DEVICE_ONLY")
+    .orElse(providers.gradleProperty("kmp.ios.deviceOnly"))
     .orElse("false")
-    .map { it.toBoolean() }
+    .map { it.equals("true", ignoreCase = true) || it == "1" }
     .get()
+
+//val deviceOnly = providers
+//    .gradleProperty("kmp.ios.deviceOnly")
+//    .orElse("false")
+//    .map { it.toBoolean() }
+//    .get()
 //val ciOnlyDevice = (findProperty("kmp.ios.deviceOnly") as String?) == "true"
 kotlin {
     if (deviceOnly) {

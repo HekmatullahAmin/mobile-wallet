@@ -77,8 +77,8 @@ jobs:
         run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
 
       - name: Generate Dummy Framework for KMP
-        run: ./gradlew -Pkmp.ios.deviceOnly=true cmp-shared:generateDummyFramework --stacktrace
-#        run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
+        run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
+#        run: ./gradlew -Pkmp.ios.deviceOnly=true cmp-shared:generateDummyFramework --stacktrace
 
       # Use Podfile.lock to pick a compatible CocoaPods version if needed
       - name: Setup CocoaPods based on Podfile.lock
@@ -99,7 +99,7 @@ jobs:
 
       - name: Build signed iOS App
         env:
-          OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED: "YES"   # <— skip script phase
+          KMP_IOS_DEVICE_ONLY: "true"      # <-- make Gradle register only iosArm64
           APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
           APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
