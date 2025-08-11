@@ -94,10 +94,19 @@ jobs:
       - name: Sanity check Ruby/CocoaPods
         run: |
           which ruby && ruby -v
-          which pod && pod --version    
+          which pod && pod --version
+
+      - name: Prebuild KMP framework (iphoneos Release)
+        run: |
+          ./gradlew :cmp-shared:syncFramework \
+            -Pkotlin.native.cocoapods.platform=iphoneos \
+            -Pkotlin.native.cocoapods.archs=arm64 \
+            -Pkotlin.native.cocoapods.configuration=Release \
+            --stacktrace    
 
       - name: Build signed iOS App
         env:
+          OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED: "YES"   # <— skip script phase
           APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
           APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
