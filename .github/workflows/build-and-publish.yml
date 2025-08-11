@@ -196,15 +196,32 @@ jobs:
         with:
           xcode-version: latest-stable
 
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
+#      - name: Precreate compose resources dir (for KMP CocoaPods)
+#        run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
 
-      - name: Generate dummy framework for KMP
-        run: ./gradlew cmp-shared:generateDummyFramework
+      - name: Generate Dummy Framework for KMP
+        run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
 
-      - name: Install CocoaPods dependencies
-        working-directory: 'cmp-ios'
-        run: pod install
+      # Use Podfile.lock to pick a compatible CocoaPods version if needed
+      - name: Setup CocoaPods based on Podfile.lock
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          podfile-path: cmp-ios/Podfile.lock
+
+      - name: Sanity check Ruby/CocoaPods
+        run: |
+          which ruby && ruby -v
+          which pod && pod --version    
+
+#      - name: Install CocoaPods
+#        run: sudo gem install cocoapods
+#
+#      - name: Generate dummy framework for KMP
+#        run: ./gradlew cmp-shared:generateDummyFramework
+#
+#      - name: Install CocoaPods dependencies
+#        working-directory: 'cmp-ios'
+#        run: pod install
 
       - name: Deploy iOS App to Firebase
         uses: openMF/kmp-publish-ios-on-firebase-action@v1.0.2
