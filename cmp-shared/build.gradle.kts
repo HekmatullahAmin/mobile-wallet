@@ -18,7 +18,20 @@ plugins {
     alias(libs.plugins.kotlinCocoapods)
 }
 
+val deviceOnly = providers
+    .gradleProperty("kmp.ios.deviceOnly")
+    .orElse("false")
+    .map { it.toBoolean() }
+    .get()
+//val ciOnlyDevice = (findProperty("kmp.ios.deviceOnly") as String?) == "true"
 kotlin {
+    if (deviceOnly) {
+        iosArm64()   // device only
+    } else {
+        iosArm64()
+        iosSimulatorArm64()
+        iosX64()
+    }
 //    listOf(
 //        iosX64(),
 //        iosArm64(),
@@ -31,9 +44,9 @@ kotlin {
 //        }
 //    }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
 
     cocoapods {
 

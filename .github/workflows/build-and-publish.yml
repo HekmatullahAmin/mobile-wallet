@@ -77,7 +77,8 @@ jobs:
         run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
 
       - name: Generate Dummy Framework for KMP
-        run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
+        run: ./gradlew -Pkmp.ios.deviceOnly=true cmp-shared:generateDummyFramework --stacktrace
+#        run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
 
       # Use Podfile.lock to pick a compatible CocoaPods version if needed
       - name: Setup CocoaPods based on Podfile.lock
@@ -94,15 +95,7 @@ jobs:
       - name: Sanity check Ruby/CocoaPods
         run: |
           which ruby && ruby -v
-          which pod && pod --version
-
-      - name: Prebuild KMP framework (iphoneos Release)
-        run: |
-          ./gradlew :cmp-shared:syncFramework \
-            -Pkotlin.native.cocoapods.platform=iphoneos \
-            -Pkotlin.native.cocoapods.archs=arm64 \
-            -Pkotlin.native.cocoapods.configuration=Release \
-            --stacktrace    
+          which pod && pod --version   
 
       - name: Build signed iOS App
         env:
