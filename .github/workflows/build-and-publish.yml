@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   Build_ios:
-    name: Build iOS
+    name: Build signed iOS
     if: ${{ inputs.build_ios }}
     runs-on: macos-latest
 
@@ -128,7 +128,7 @@ jobs:
             provisioning_profile_name:"$PROVISIONING_PROFILE_NAME"
 
   Build_Debug_ios:
-    name: Build iOS
+    name: Build debug iOS
     if: ${{ inputs.build_debug_ios }}
     runs-on: macos-latest
 

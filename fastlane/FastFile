@@ -409,6 +409,12 @@ platform :ios do
   desc "Build Ios application"
   lane :build_ios do |options|
       ios_config = FastlaneConfig::IosConfig::BUILD_CONFIG
+      # Run `pod install` (Fastlane will use bundle exec if you have a Gemfile)
+              cocoapods(
+                podfile: "cmp-ios/Podfile",
+                clean_install: true,
+                repo_update: true
+              )
       build_ios_app(
           scheme: ios_config[:scheme],
           workspace: ios_config[:workspace_path],
