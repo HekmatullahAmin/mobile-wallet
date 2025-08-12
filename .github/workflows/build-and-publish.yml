@@ -262,15 +262,17 @@ jobs:
   Publish_to_Firebase:
     name: Publish fiebase
     if: ${{ inputs.distribute_ios_firebase }}
-    runs-on: macos-latest
+    runs-on: macos-13
+#    runs-on: macos-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup latest Xcode version
+      - name: Setup Xcode version to 15.2
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable
+          xcode-version: '15.2'
+#          xcode-version: latest-stable
 
 #      - name: Precreate compose resources dir (for KMP CocoaPods)
 #        run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
