@@ -415,7 +415,9 @@ platform :ios do
           output_name: ios_config[:output_name],
           output_directory: ios_config[:output_directory],
           skip_codesigning: true,
-          skip_archive: true
+          skip_archive: true,
+          xcodebuild_formatter: "", # ← disable xcbeautify/xcpretty
+          xcargs: "ARCHS=arm64 ONLY_ACTIVE_ARCH=YES KOTLIN_BUILD_EXTRA_ARGS='--info --stacktrace'"
       )
   end
 
