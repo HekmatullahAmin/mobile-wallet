@@ -328,9 +328,10 @@ platform :ios do
       unless ENV['CI']
           UI.message("🖥️ Running locally, skipping CI-specific setup.")
       else
-          setup_ci(
-            provider: "circleci"
-          )
+          setup_ci
+#           setup_ci(
+#             provider: "circleci"
+#           )
       end
   end
 
@@ -390,7 +391,8 @@ platform :ios do
           output_directory: ios_config[:output_directory],
           configuration: "Release",
           xcodebuild_formatter: "", # ← disable xcbeautify/xcpretty
-          xcargs: "KOTLIN_BUILD_EXTRA_ARGS='--info --stacktrace'"
+          xcargs: "ARCHS=arm64 ONLY_ACTIVE_ARCH=YES KOTLIN_BUILD_EXTRA_ARGS='--info --stacktrace'"
+#           xcargs: "KOTLIN_BUILD_EXTRA_ARGS='--info --stacktrace'"
 #           export_options: {
 #               provisioningProfiles: {
 #                   app_identifier => provisioning_profile_name
