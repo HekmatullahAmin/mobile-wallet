@@ -78,8 +78,8 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           printf "Host github.com\n  IdentityFile ~/.ssh/match_ci_key\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
 
-      - name: Precreate compose resources dir (for KMP CocoaPods)
-        run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
+#      - name: Precreate compose resources dir (for KMP CocoaPods)
+#        run: mkdir -p cmp-shared/build/compose/cocoapods/compose-resources
 
       - name: Generate Dummy Framework for KMP
         run: ./gradlew cmp-shared:generateDummyFramework --stacktrace
@@ -103,9 +103,12 @@ jobs:
           which pod && pod --version   
 
       - name: Verify Gradle JVM args
-        shell: bash
-        run: |
-          ./gradlew -Dorg.gradle.logging.level=info help | sed -n '1,60p'
+        run: ./gradlew -Dorg.gradle.jvmargs="-Xmx7g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:+UseParallelGC -XX:MaxMetaspaceSize=2g" help | sed -n '1,60p'
+
+#      - name: Verify Gradle JVM args
+#        shell: bash
+#        run: |
+#          ./gradlew -Dorg.gradle.logging.level=info help | sed -n '1,60p'
 
       - name: Build signed iOS App
         shell: bash
