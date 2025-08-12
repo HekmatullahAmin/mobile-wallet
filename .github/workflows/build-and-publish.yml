@@ -287,7 +287,81 @@ jobs:
       - name: Sanity check Ruby/CocoaPods
         run: |
           which ruby && ruby -v
-          which pod && pod --version    
+          which pod && pod --version
+
+      - name: Configure Ruby
+        uses: ruby/setup-ruby@a2bbe5b1b236842c1cb7dd11e8e3b51e0a616acc # v1.202.0
+        with:
+          bundler-cache: true
+
+      - name: Install Fastlane
+        shell: bash
+        run: |
+          gem install bundler:2.2.27
+          bundle install --jobs 4 --retry 3
+          bundle exec fastlane add_plugin firebase_app_distribution
+          bundle exec fastlane add_plugin increment_build_number
+
+      - name: Set up SSH for Match
+        env:
+          MATCH_SSH_PRIVATE_KEY: ${{ secrets.MATCH_SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$MATCH_SSH_PRIVATE_KEY" | base64 --decode > ~/.ssh/match_ci_key
+          chmod 600 ~/.ssh/match_ci_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          printf "Host github.com\n  IdentityFile ~/.ssh/match_ci_key\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
+
+      # Inflate Firebase credentials
+      - name: Inflate Secrets
+        shell: bash
+        env:
+          FIREBASE_CREDS: ${{ secrets.FIREBASECREDS }}
+          AUTH_KEY: ${{ secrets.APPSTORE_AUTH_KEY }}
+        run: |
+          mkdir -p secrets
+          touch secrets/firebaseAppDistributionServiceCredentialsFile.json
+          echo $FIREBASE_CREDS | base64 --decode > secrets/firebaseAppDistributionServiceCredentialsFile.json
+          echo "$AUTH_KEY" | base64 --decode > secrets/Auth_key.p8
+
+      - name: Upload iOS App to Firebase Distribution
+        shell: bash
+        env:
+          KMP_IOS_DEVICE_ONLY: "true"      # <-- make Gradle register only iosArm64
+          APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+          APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          GIT_URL: "git@github.com:openMF/ios-provisioning-profile.git"
+          GIT_BRANCH: "mifospay"
+          MATCH_TYPE: "adhoc"
+          APP_IDENTIFIER: "org.mifospay"
+          PROVISIONING_PROFILE_NAME: "match AdHoc org.mifospay"
+          FIREBASE_APP_ID: '1:728434912738:ios:86a7badfaed88b841a1dbb'
+          GROUPS: 'mifos-mobile-apps'
+
+        run: |
+          bundle exec fastlane ios deploy_on_firebase \
+          app_identifier:"$APP_IDENTIFIER" \
+          git_url:"$GIT_URL" \
+          git_branch:"$GIT_BRANCH" \
+          match_type:"$MATCH_TYPE" \
+          provisioning_profile_name:"$PROVISIONING_PROFILE_NAME" \
+          appstore_key_id:"$APPSTORE_KEY_ID" \
+          appstore_issuer_id:"$APPSTORE_ISSUER_ID" \
+          match_password:"$MATCH_PASSWORD" \
+          git_private_key:~/.ssh/match_ci_key \
+          firebase_app_id:"$FIREBASE_APP_ID" \
+          serviceCredsFile:secrets/firebaseAppDistributionServiceCredentialsFile.json \
+          key_filepath:secrets/Auth_key.p8 \
+          groups:"$GROUPS"
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app
+          retention-days: 1
+          compression-level: 9
+          path: '**/*.ipa'
 
 #      - name: Install CocoaPods
 #        run: sudo gem install cocoapods
@@ -298,22 +372,22 @@ jobs:
 #      - name: Install CocoaPods dependencies
 #        working-directory: 'cmp-ios'
 #        run: pod install
-
-      - name: Deploy iOS App to Firebase
-        uses: openMF/kmp-publish-ios-on-firebase-action@v1.0.2
-        continue-on-error: true
-        with:
-          app_identifier: 'org.mifospay'
-          git_url: 'git@github.com:openMF/ios-provisioning-profile.git'
-          git_branch: 'mifospay'
-          match_type: 'adhoc'
-          provisioning_profile_name: 'match AdHoc org.mifospay'
-          appstore_key_id: ${{ secrets.APPSTORE_KEY_ID }}
-          appstore_issuer_id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          appstore_auth_key: ${{ secrets.APPSTORE_AUTH_KEY }}
-          match_password: ${{ secrets.MATCH_PASSWORD }}
-          match_ssh_private_key: ${{ secrets.MATCH_SSH_PRIVATE_KEY }}
-          ios_package_name: 'cmp-ios'
-          firebase_app_id: '1:728434912738:ios:86a7badfaed88b841a1dbb'
-          firebase_creds: ${{ secrets.FIREBASECREDS }}
-          tester_groups: 'mifos-mobile-apps'
+#
+#      - name: Deploy iOS App to Firebase
+#        uses: openMF/kmp-publish-ios-on-firebase-action@v1.0.2
+#        continue-on-error: true
+#        with:
+#          app_identifier: 'org.mifospay'
+#          git_url: 'git@github.com:openMF/ios-provisioning-profile.git'
+#          git_branch: 'mifospay'
+#          match_type: 'adhoc'
+#          provisioning_profile_name: 'match AdHoc org.mifospay'
+#          appstore_key_id: ${{ secrets.APPSTORE_KEY_ID }}
+#          appstore_issuer_id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#          appstore_auth_key: ${{ secrets.APPSTORE_AUTH_KEY }}
+#          match_password: ${{ secrets.MATCH_PASSWORD }}
+#          match_ssh_private_key: ${{ secrets.MATCH_SSH_PRIVATE_KEY }}
+#          ios_package_name: 'cmp-ios'
+#          firebase_app_id: '1:728434912738:ios:86a7badfaed88b841a1dbb'
+#          firebase_creds: ${{ secrets.FIREBASECREDS }}
+#          tester_groups: 'mifos-mobile-apps'
