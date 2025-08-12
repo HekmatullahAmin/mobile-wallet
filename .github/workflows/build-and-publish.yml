@@ -6,11 +6,11 @@ on:
       build_ios:
         type: boolean
         default: false
-        description: Build iOS app
+        description: Build signed ios app
       build_debug_ios:
         type: boolean
         default: false
-        description: Build iOS app
+        description: Build debug ios app
       distribute_ios_firebase:
         type: boolean
         default: false
