@@ -102,13 +102,13 @@ jobs:
           which ruby && ruby -v
           which pod && pod --version   
 
-      - name: Verify Gradle JVM args
-        run: ./gradlew -Dorg.gradle.jvmargs="-Xmx7g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:+UseParallelGC -XX:MaxMetaspaceSize=2g" help | sed -n '1,60p'
+      - name: Install Gradle JVM args
+        run: ./gradlew build -Dorg.gradle.jvmargs="-Xmx7g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:+UseParallelGC -XX:MaxMetaspaceSize=2g"
 
-#      - name: Verify Gradle JVM args
-#        shell: bash
-#        run: |
-#          ./gradlew -Dorg.gradle.logging.level=info help | sed -n '1,60p'
+      - name: Verify Gradle JVM args
+        shell: bash
+        run: |
+          ./gradlew -Dorg.gradle.logging.level=info help | sed -n '1,60p'
 
       - name: Build signed iOS App
         shell: bash
