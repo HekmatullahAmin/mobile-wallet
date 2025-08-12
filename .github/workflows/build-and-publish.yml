@@ -267,7 +267,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Xcode version to 15.2
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Setup Xcode version
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
