@@ -378,7 +378,7 @@ jobs:
 #        run: pod install
 
       - name: Deploy iOS App to Firebase
-        uses: HekmatullahAmin/mifos-x-actionhub@cocoapods-test
+        uses: HekmatullahAmin/mifos-x-actionhub/.github/workflows/multi-platform-build-and-publish@cocoapods-test
         continue-on-error: true
         with:
           app_identifier: 'org.mifospay'
