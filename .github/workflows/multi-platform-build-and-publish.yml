@@ -71,18 +71,23 @@ on:
 
       target_branch:
         type: string
-        default: 'development'
+        default: 'dev'
         description: 'Target branch for release'
 
-      build_ios:
+      distribute_ios_firebase:
         type: boolean
         default: false
-        description: Build iOS App
+        description: Distribute iOS App via Firebase App Distribution
 
-      publish_ios:
+      distribute_ios_testflight:
         type: boolean
         default: false
-        description: Publish iOS App On App Store
+        description: Distribute iOS App via TestFlight (App Store Connect)
+
+      distribute_ios_appstore:
+        type: boolean
+        default: false
+        description: Distribute iOS App to Appstore
 
 permissions:
   contents: write
