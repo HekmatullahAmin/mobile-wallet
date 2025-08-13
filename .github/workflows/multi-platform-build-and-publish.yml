@@ -96,17 +96,28 @@ concurrency:
 jobs:
   multi_platform_build_and_publish:
     name: Multi-Platform Build and Publish
-    uses: openMF/mifos-x-actionhub/.github/workflows/multi-platform-build-and-publish.yaml@v1.0.0
+    uses: HekmatullahAmin/mifos-x-actionhub/.github/workflows/multi-platform-build-and-publish.yaml@vcocoapods-test
     with:
       release_type: ${{ inputs.release_type }}
       target_branch: ${{ inputs.target_branch }}
-      android_package_name: 'mifospay-android' # <-- Change this to your android package name
-      ios_package_name: 'mifospay-ios' # <-- Change this to your ios package name
-      desktop_package_name: 'mifospay-desktop' # <-- Change this to your desktop package name
-      web_package_name: 'mifospay-web'   # <-- Change this to your web package name
+      android_package_name: 'cmp-android' # <-- Change this to your android package name
+      ios_package_name: 'cmp-ios' # <-- Change this to your ios package name
+      desktop_package_name: 'cmp-desktop' # <-- Change this to your desktop package name
+      web_package_name: 'cmp-web'   # <-- Change this to your web package name
       tester_groups: 'mifos-mobile-apps' # <-- Change this to your Firebase tester group
-      build_ios: ${{ inputs.build_ios }}
-      publish_ios: ${{ inputs.publish_ios }}
+      app_identifier: 'org.mifospay'
+      git_url: 'git@github.com:openMF/ios-provisioning-profile.git'
+      git_branch: 'mifospay'
+      match_type: 'adhoc'
+      provisioning_profile_name: 'match AdHoc org.mifospay'
+      firebase_app_id: '1:728434912738:ios:86a7badfaed88b841a1dbb'
+      metadata_path: './fastlane/metadata'
+      use_cocoapods: true         # <-- Set to true if using CocoaPods integration for KMP
+      shared_module: ':cmp-shared' # <-- Gradle path to your shared KMP module (e.g., :shared)
+      distribute_ios_firebase: ${{ inputs.distribute_ios_firebase }}
+      distribute_ios_testflight: ${{ inputs.distribute_ios_testflight }}
+      distribute_ios_appstore: ${{ inputs.distribute_ios_appstore }}
+
     secrets:
       original_keystore_file: ${{ secrets.ORIGINAL_KEYSTORE_FILE }}
       original_keystore_file_password: ${{ secrets.ORIGINAL_KEYSTORE_FILE_PASSWORD }}
@@ -121,6 +132,11 @@ jobs:
       notarization_apple_id: ${{ secrets.NOTARIZATION_APPLE_ID }}
       notarization_password: ${{ secrets.NOTARIZATION_PASSWORD }}
       notarization_team_id: ${{ secrets.NOTARIZATION_TEAM_ID }}
+      appstore_key_id: ${{ secrets.APPSTORE_KEY_ID }}
+      appstore_issuer_id: ${{ secrets.APPSTORE_ISSUER_ID }}
+      appstore_auth_key: ${{ secrets.APPSTORE_AUTH_KEY }}
+      match_password: ${{ secrets.MATCH_PASSWORD }}
+      match_ssh_private_key: ${{ secrets.MATCH_SSH_PRIVATE_KEY }}
 
       windows_signing_key: ${{ secrets.WINDOWS_SIGNING_KEY }}
       windows_signing_password: ${{ secrets.WINDOWS_SIGNING_PASSWORD }}
