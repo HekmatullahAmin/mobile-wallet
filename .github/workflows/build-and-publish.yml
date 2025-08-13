@@ -264,16 +264,16 @@ jobs:
     runs-on: macos-latest
 #    runs-on: macos-13
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Copy CI gradle.properties
-        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
-
-      - name: Setup Xcode version
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
+#      - name: Checkout Repository
+#        uses: actions/checkout@v4
+#
+#      - name: Copy CI gradle.properties
+#        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+#
+#      - name: Setup Xcode version
+#        uses: maxim-lobanov/setup-xcode@v1
+#        with:
+#          xcode-version: latest-stable
 #          xcode-version: '15.2'
 
 #      - name: Precreate compose resources dir (for KMP CocoaPods)
@@ -367,18 +367,18 @@ jobs:
 #          compression-level: 9
 #          path: '**/*.ipa'
 
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
-
-      - name: Generate dummy framework for KMP
-        run: ./gradlew cmp-shared:generateDummyFramework
+#      - name: Install CocoaPods
+#        run: sudo gem install cocoapods
+#
+#      - name: Generate dummy framework for KMP
+#        run: ./gradlew cmp-shared:generateDummyFramework
 
 #      - name: Install CocoaPods dependencies
 #        working-directory: 'cmp-ios'
 #        run: pod install
 
       - name: Deploy iOS App to Firebase
-        uses: openMF/kmp-publish-ios-on-firebase-action@v1.0.2
+        uses: HekmatullahAmin/kmp-publish-ios-on-firebase-action@cocoapods-test
         continue-on-error: true
         with:
           app_identifier: 'org.mifospay'
