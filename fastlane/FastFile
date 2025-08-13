@@ -498,6 +498,14 @@ platform :ios do
         options.merge(match_type: "appstore")
       )
 
+      create_app_online(
+        username: "hekmatullah.amin@icloud.com",
+        app_identifier: ios_config[:app_identifier],
+        app_name: "Mifos Pay",
+        sku: "mifospay-sku",
+#         team_name: "SunApps GmbH" # Only necessary when in multiple teams.
+      )
+
       increment_version_number(
         xcodeproj: ios_config[:project_path],
         version_number: ios_config[:version_number]
