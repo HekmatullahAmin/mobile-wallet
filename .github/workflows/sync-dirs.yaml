@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: dev
+          ref: development
 
       - name: Setup Git config
         run: |
@@ -233,6 +233,11 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
 #          token: ${{ secrets.PAT_TOKEN }}
+          branch: sync-dirs-${{ github.run_number }}
+          labels: |
+            sync
+            automated pr
+          base: development
           commit-message: "chore: Sync directories and files from upstream"
           title: "chore: Sync directories and files from upstream"
           body: |
@@ -263,9 +268,4 @@ jobs:
             - secrets.env
             
             Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          branch: sync-dirs-${{ github.run_number }}
           delete-branch: true
-          labels: |
-            sync
-            automated pr
-          base: dev
