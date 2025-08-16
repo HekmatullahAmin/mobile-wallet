@@ -200,7 +200,7 @@ jobs:
           
           # Sync files
           for file in "${FILES[@]}"; do
-            local dir=$(dirname "$file")
+            dir=$(dirname "$file")
             if ! should_exclude "$dir" "$file"; then
               echo "Syncing $file..."
               git checkout "${{ env.TEMP_BRANCH }}" -- "$file" || true
