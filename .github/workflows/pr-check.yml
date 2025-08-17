@@ -55,7 +55,7 @@
 #   | `desktop_package_name` | Name of the Desktop project module | String |    Yes   |
 #
 
-# https://github.com/openMF/mifos-mobile-github-actions/blob/main/.github/workflows/pr-check.yaml
+# https://github.com/openMF/mifos-x-actionhub/blob/main/.github/workflows/pr-check.yaml
 
 # ##############################################################################
 #                 DON'T EDIT THIS FILE UNLESS NECESSARY                        #
@@ -68,7 +68,8 @@ name: PR Checks
 on:
   push:
     branches: [ dev ]  # Runs on pushes to dev branch
-  pull_request:       # Runs on all pull requests
+  pull_request:
+    branches: [ dev ]  # Runs on pushes to dev branch
 
 # Concurrency settings to prevent multiple simultaneous workflow runs
 concurrency:
@@ -81,10 +82,12 @@ permissions:
 jobs:
   pr_checks:
     name: PR Checks
-    uses: openMF/mifos-mobile-github-actions/.github/workflows/pr-check.yaml@main
-    secrets: inherit
+    uses: openMF/mifos-x-actionhub/.github/workflows/pr-check.yaml@v1.0.3
     with:
-      android_package_name: 'mifospay-android' # <-- Change Your Android Package Name
-      desktop_package_name: 'mifospay-desktop' # <-- Change Your Desktop Package Name
-      web_package_name: 'mifospay-web' # <-- Change Your Web Package Name
-      ios_package_name: 'mifospay-ios' # <-- Change Your iOS Package Name
+      android_package_name: 'cmp-android' # <-- Change Your Android Package Name
+      desktop_package_name: 'cmp-desktop' # <-- Change Your Desktop Package Name
+      web_package_name: 'cmp-web' # <-- Change Your Web Package Name
+      ios_package_name: 'cmp-ios' # <-- Change Your iOS Package Name
+      build_ios: true # <-- Change to 'false' if you don't want to build iOS
+      use_cocoapods: true
+      shared_module: ':cmp-shared'
