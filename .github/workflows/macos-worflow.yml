@@ -19,7 +19,7 @@ jobs:
         with:
           app_identifier: org.mifospay
           cmp_desktop_dir: 'cmp-desktop'
-#          keychain_name: signing-${{ github.run_id }}.keychain-db   # optional
+          keychain_name: signing-${{ github.run_id }}.keychain-db   # optional
 #          java_version: '21'                                        # optional
           keychain_password: ${{ secrets.KEYCHAIN_PASSWORD }}
           certificates_password: ${{ secrets.CERTIFICATES_PASSWORD }}
